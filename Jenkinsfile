@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        // remove maven, your project is gradle
-        // maven 'maven-3.9'
-    }
-
     environment {
         VERSION = "1.0"
     }
