@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  app:
+    image: bisrat1/ractapp:1.1.1
+    container_name: java-maven-app
+    ports:
+      - "3080:3080"
+    restart: always
