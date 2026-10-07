@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        VERSION = "1.0"
+        VERSION = "3.0"
     }
 
     stages {
