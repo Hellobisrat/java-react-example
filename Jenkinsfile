@@ -1,15 +1,36 @@
 pipeline {
     agent any
 
+     environment {
+    VERSION = "1.0"
+}
+
     stages {
         stage('test') {
             steps {
                 echo "Testing the application"
             }
         }
-        stage('Build') {
+         stage('Build jar') {
+           
             steps {
-                echo "Building branch ${env.BRANCH_NAME}"
+                echo "Building the application version ${VERSION}"
+                sh 'mvn clean package'
+            }
+        } stage('Docker Build & Push') {
+           
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId:'docker-hub-repo',
+                    passwordVariable:'PASSWORD',
+                    usernameVariable:'USERNAME'
+                )]) {
+                    sh """
+                        docker build -t bisrat1/reactapp:${VERSION} .
+                        echo \$PASSWORD | docker login -u \$USERNAME --password-stdin
+                        docker push bisrat1/react-app:${VERSION}
+                    """
+                }
             }
         }
        stage('Deploy') {
