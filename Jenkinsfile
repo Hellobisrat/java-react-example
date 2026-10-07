@@ -28,9 +28,9 @@ pipeline {
                     usernameVariable:'USERNAME'
                 )]) {
                     sh """
-                        docker build -t bisrat1/reactapp:${VERSION} .
+                        docker build -t bisrat1/javareactapp:${VERSION} .
                         echo \$PASSWORD | docker login -u \$USERNAME --password-stdin
-                        docker push bisrat1/reactapp:${VERSION}
+                        docker push bisrat1/javareactapp:${VERSION}
                     """
                 }
             }
@@ -47,7 +47,7 @@ pipeline {
 
                         sh "scp -o StrictHostKeyChecking=no docker-compose.yaml ec2-user@54.85.3.217:/home/ec2-user"
 
-                        sh "ssh -o StrictHostKeyChecking=no ec2-user@54.85.3.217 'docker pull bisrat1/reactapp:${VERSION}'"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@54.85.3.217 'docker pull bisrat1/javareactapp:${VERSION}'"
 
                         sh "ssh -o StrictHostKeyChecking=no ec2-user@54.85.3.217 '${dockerComposeCmd}'"
                     }
