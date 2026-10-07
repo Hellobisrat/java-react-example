@@ -1,9 +1,13 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'maven-3.9'
+    }
+
      environment {
     VERSION = "1.0"
-}
+         }
 
     stages {
         stage('test') {
@@ -17,7 +21,8 @@ pipeline {
                 echo "Building the application version ${VERSION}"
                 sh 'mvn clean package'
             }
-        } stage('Docker Build & Push') {
+        } 
+        stage('Docker Build & Push') {
            
             steps {
                 withCredentials([usernamePassword(
