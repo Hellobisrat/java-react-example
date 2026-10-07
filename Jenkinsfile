@@ -5,6 +5,11 @@ pipeline {
         VERSION = "3.0"
     }
 
+    tools {
+    jdk 'jdk17'
+}
+
+
     stages {
 
         stage('test') {
